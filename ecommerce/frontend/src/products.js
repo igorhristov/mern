@@ -10,6 +10,8 @@ const products = [
     countInStock: 3,
     rating: 4.5,
     numReviews: 4,
+    description:
+      '65"(165cm)4K Ultra HD SMART LED TV Резолуција:(3840x2160pix) Panel Frequency 50Hz Quad Core Processor HDR High Dynamic Range Miracast RX HDMI,USB DVB-T2/C/S2 Вграден Wi-Fi',
   },
   {
     _id: "2",
@@ -23,6 +25,8 @@ const products = [
     countInStock: 1,
     rating: 4.0,
     numReviews: 7,
+    description:
+      '65"(165cm)4K Ultra HD SMART LED TV Резолуција:(3840x2160pix) Panel Frequency 50Hz Quad Core Processor HDR High Dynamic Range Miracast RX HDMI,USB DVB-T2/C/S2 Вграден Wi-Fi',
   },
 
   {
@@ -33,9 +37,11 @@ const products = [
     brand: "LG",
     category: "ТЕЛЕВИЗОРИ",
     price: "225995",
-    countInStock: 2,
+    countInStock: 0,
     rating: 3.5,
     numReviews: 4,
+    description:
+      '65"(165cm)4K Ultra HD SMART LED TV Резолуција:(3840x2160pix) Panel Frequency 50Hz Quad Core Processor HDR High Dynamic Range Miracast RX HDMI,USB DVB-T2/C/S2 Вграден Wi-Fi',
   },
   {
     _id: "4",
@@ -47,17 +53,23 @@ const products = [
     countInStock: 12,
     rating: 2.5,
     numReviews: 8,
+    description:
+      '65"(165cm)4K Ultra HD SMART LED TV Резолуција:(3840x2160pix) Panel Frequency 50Hz Quad Core Processor HDR High Dynamic Range Miracast RX HDMI,USB DVB-T2/C/S2 Вграден Wi-Fi',
   },
   {
     _id: "5",
-    name: '4k UHD Smart TV SAMSUNG UE50TU8072 UXXH, 50"(127cm), Tizen, 2100Hz PQI, WiFi',
-    image: "https://www.neptun.mk/2020/07/02/11_a0eb8fe4-2f9b-4238-b20a-58bccfd902af.JPG",
+    name:
+      '4k UHD Smart TV SAMSUNG UE50TU8072 UXXH, 50"(127cm), Tizen, 2100Hz PQI, WiFi',
+    image:
+      "https://www.neptun.mk/2020/07/02/11_a0eb8fe4-2f9b-4238-b20a-58bccfd902af.JPG",
     brand: "Samsung",
     category: "ТЕЛЕВИЗОРИ",
     price: "30999",
     countInStock: 2,
     rating: 1.9,
     numReviews: 5,
+    description:
+      '65"(165cm)4K Ultra HD SMART LED TV Резолуција:(3840x2160pix) Panel Frequency 50Hz Quad Core Processor HDR High Dynamic Range Miracast RX HDMI,USB DVB-T2/C/S2 Вграден Wi-Fi',
   },
 ];
-export default products
+export default products;
