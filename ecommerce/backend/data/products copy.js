@@ -1,5 +1,6 @@
 const products = [
   {
+    _id: "1",
     name: '4k UHD SMART LED TV GRUNDIG 65GDU7500B, 65"(165cm), HDR, WiFi',
     image:
       "https://www.neptun.mk/2019/10/13/29218219_e05a9d25-9831-406a-a76f-5ca652f88963.jpg",
@@ -13,6 +14,7 @@ const products = [
       '65"(165cm)4K Ultra HD SMART LED TV Резолуција:(3840x2160pix) Panel Frequency 50Hz Quad Core Processor HDR High Dynamic Range Miracast RX HDMI,USB DVB-T2/C/S2 Вграден Wi-Fi',
   },
   {
+    _id: "2",
     name:
       '4k UHD Smart ОLED TV LG 55BX 3LB, 55"(139.7cm), α7Gen3, 100 Hz, WiFi',
     image:
@@ -28,6 +30,7 @@ const products = [
   },
 
   {
+    _id: "3",
     name: "4k UHD OLED Smart TV LG OLED 65W9 PLA, α9 Gen2, HDR10, WebOS, WiFi",
     image:
       "https://www.neptun.mk/2019/12/12/oledw9front1_6aede183-dbbe-48f6-a831-0a0d5fde1e14.jpg?width=185",
@@ -41,6 +44,7 @@ const products = [
       '65"(165cm)4K Ultra HD SMART LED TV Резолуција:(3840x2160pix) Panel Frequency 50Hz Quad Core Processor HDR High Dynamic Range Miracast RX HDMI,USB DVB-T2/C/S2 Вграден Wi-Fi',
   },
   {
+    _id: "4",
     name: 'FHD LED TV FUEGO 40EL600T, 40"(102cm), 100Hz',
     image: "https://www.neptun.mk/2020/01/16/FUEGO-32-EL-600-T.jpg",
     brand: "Fuego",
@@ -53,6 +57,7 @@ const products = [
       '65"(165cm)4K Ultra HD SMART LED TV Резолуција:(3840x2160pix) Panel Frequency 50Hz Quad Core Processor HDR High Dynamic Range Miracast RX HDMI,USB DVB-T2/C/S2 Вграден Wi-Fi',
   },
   {
+    _id: "5",
     name:
       '4k UHD Smart TV SAMSUNG UE50TU8072 UXXH, 50"(127cm), Tizen, 2100Hz PQI, WiFi',
     image:
