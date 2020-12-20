@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
-import products from "../products";
+// import products from "../products";
 import Rating from "../components/Rating";
 
 const ProductPage = ({ match }) => {
-  const product = products.find((p) => p._id === match.params.id);
+  // const product = products.find((p) => p._id === match.params.id);
+  const [product, setProduct] = useState({});
+  const productId = match.params.id;
+
+  useEffect(() => {
+    fetch(`/api/products/${productId}`)
+      .then((res) => res.json())
+      .then((data) => setProduct(data));
+  }, [productId]);
+
   return (
     <>
       <Link className="btn btn-outline-secondary my-3" to="/">
@@ -24,7 +33,7 @@ const ProductPage = ({ match }) => {
             <ListGroup.Item>
               <Rating
                 value={product.rating}
-                text={`${product.numReviews} reviews`}
+                text={`${product.numReviews} мислења`}
               />
             </ListGroup.Item>
             <ListGroup.Item>Цена: {product.price} ден</ListGroup.Item>
@@ -37,7 +46,7 @@ const ProductPage = ({ match }) => {
             <ListGroup variant="flush">
               <ListGroup.Item>
                 <Row>
-                  <Col>Price:</Col>
+                  <Col>Цена:</Col>
                   <Col>
                     <strong>{product.price}</strong>
                   </Col>
@@ -45,10 +54,8 @@ const ProductPage = ({ match }) => {
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Status:</Col>
-                  <Col>
-                    {product.countInStock > 0 ? "In Stock" : "Out of Stock"}
-                  </Col>
+                  <Col>Залиха:</Col>
+                  <Col>{product.countInStock > 0 ? "Има" : "Нема Залиха"}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
