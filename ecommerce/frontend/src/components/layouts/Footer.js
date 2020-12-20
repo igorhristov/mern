@@ -4,10 +4,10 @@ import { Container, Row, Col } from "react-bootstrap";
 const Footer = () => {
   return (
     <footer>
-      <Container>
+      <Container fluid={true}>
         <Row>
           <Col className="text-center py-3 bg-dark text-secondary">
-            &copy; Online Shop {' '}
+            &copy; Online Продавница {' '}
             {new Date().getFullYear()}
           </Col>
         </Row>
