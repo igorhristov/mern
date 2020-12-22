@@ -3,25 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 import Product from "../components/Product";
 import { listProducts } from "../redux/actions/productActions";
-// import products from "../products";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
 
 const HomeScreen = () => {
-  // const [products, setProducts] = useState([]);
-  // const url = "/api/products";
-
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
 
   const { loading, error, products } = productList;
 
   useEffect(() => {
-    // const getProductsData = async () => {
-    //   const res = await fetch(url);
-    //   const getData = await res.json();
-    //   setProducts(getData)
-    // };
-    // getProductsData()
-
     dispatch(listProducts());
   }, [dispatch]);
 
@@ -29,9 +20,9 @@ const HomeScreen = () => {
     <>
       <h1>Најновите Телевизори</h1>
       {loading ? (
-        <h2>Loading...</h2>
+        <Loader />
       ) : error ? (
-        <h3>{error}</h3>
+        <Message variant="danger">{error}</Message>
       ) : (
         <Row className="d-flex align-items-stretch">
           {products &&
