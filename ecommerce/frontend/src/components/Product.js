@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import Rating from "./Rating";
 
-const Product = ({ product }) => {
-  return (
+const Product = ({ product }) => (
     <Card className=" p-3 rounded h-100">
       <Link to={`/product/${product._id}`}>
         <Card.Img fluid src={product.image} varient="top" />
@@ -31,6 +30,6 @@ const Product = ({ product }) => {
       </Card.Footer>
     </Card>
   );
-};
+
 
 export default Product;
