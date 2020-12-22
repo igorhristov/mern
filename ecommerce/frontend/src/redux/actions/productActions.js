@@ -7,7 +7,7 @@ import {
   SINGLE_PRODUCT_FAIL,
 } from "../constants/productConstants";
 
-export const listProducts = () => async (dispatch) => {
+export const actionListProducts = () => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });
     const res = await fetch("/api/products");
@@ -44,7 +44,7 @@ export const listProducts = () => async (dispatch) => {
 //   }, []);
 
 
-export const listSingleProduct = (id) => async (dispatch) => {
+export const actionListSingleProduct = (id) => async (dispatch) => {
   try {
     dispatch({ type: SINGLE_PRODUCT_REQUEST });
     const res = await fetch(`/api/products/${id}`);

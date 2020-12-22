@@ -1,20 +1,35 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Image,
+  ListGroup,
+  Card,
+  Button,
+  Form,
+} from "react-bootstrap";
 import Rating from "../components/Rating";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { listSingleProduct } from "../redux/actions/productActions";
+import { actionListSingleProduct } from "../redux/actions/productActions";
 
-const ProductPage = ({ match }) => {
+const ProductPage = ({ history, match }) => {
+  const [qty, setQty] = useState(0);
+
   const dispatch = useDispatch();
+
   const singleProduct = useSelector((state) => state.singleProduct);
   const { loading, error, product } = singleProduct;
 
   useEffect(() => {
-    dispatch(listSingleProduct(match.params.id));
+    dispatch(actionListSingleProduct(match.params.id));
   }, [dispatch, match]);
+
+  const addToCardHandler = () => {
+    history.push(`/cart/${match.params.id}?qty=${qty}`);
+  };
 
   return (
     <>
@@ -66,12 +81,36 @@ const ProductPage = ({ match }) => {
                     </Col>
                   </Row>
                 </ListGroup.Item>
+
+                {product.countInStock > 0 && (
+                  <ListGroup.Item>
+                    <Row>
+                      <Col>Количина</Col>
+
+                      <Col>
+                        <Form.Control
+                          as="select"
+                          value={qty}
+                          onChange={(e) => setQty(e.target.value)}
+                        >
+                          {[...Array(product.countInStock).keys()].map((x) => (
+                            <option key={x + 1} value={x + 1}>
+                              {x + 1}
+                            </option>
+                          ))}
+                        </Form.Control>
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
+                )}
+
                 <ListGroup.Item>
                   <Row>
                     <Button
                       disabled={product.countInStock === 0}
                       className="btn-block"
                       type="button"
+                      onClick={addToCardHandler}
                     >
                       Додади во кошничка
                     </Button>
