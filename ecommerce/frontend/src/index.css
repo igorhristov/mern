@@ -1,5 +1,9 @@
+body {
+  height: 100%;
+}
+
 main {
-  min-height: 90vh;
+  min-height: 100vh;
 }
 
 h3 {
