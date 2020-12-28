@@ -23,6 +23,39 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
+// #опис        Регистрирај нов корисник
+// #патека      POST /api/users
+// #пристап     Јавен
+const registerUser = asyncHandler(async (req, res) => {
+  const { name, email, password } = req.body;
+
+  const userExist = await User.findOne({ email });
+
+  if (userExist) {
+    res.status(400);
+    throw new Error("User already exists");
+  }
+
+  const user = await User.create({
+    name,
+    email,
+    password,
+  });
+
+  if (user) {
+    res.status(201).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      token: generateToken(user._id),
+    });
+  } else {
+    res.status(400);
+    throw new Error("Invalid user data");
+  }
+});
+
 // #опис        Профил на корисникот
 // #патека      GET /api/users/profile
 // #пристап     приватен
@@ -40,7 +73,6 @@ const getUserProfile = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("User not found");
   }
-
 });
 
-module.exports = { authUser, getUserProfile };
+module.exports = { authUser, getUserProfile, registerUser };
