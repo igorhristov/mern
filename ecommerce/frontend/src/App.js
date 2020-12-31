@@ -8,6 +8,7 @@ import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import ProfilePage from "./pages/ProfilePage";
 
 const App = () => {
   return (
@@ -17,8 +18,8 @@ const App = () => {
         <Container>
           <Route path="/login" component={LoginPage} />
           <Route path="/register" component={RegisterPage} />
+          <Route path="/profile" component={ProfilePage} />
           <Route path="/product/:id" component={ProductPage} />
-
           {/* ? at end of cart/:id? mean that id is optional */}
           <Route path="/cart/:id?" component={CartPage} />
           <Route path="/" component={HomePage} exact />
