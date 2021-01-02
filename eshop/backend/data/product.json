@@ -1,0 +1,41 @@
+[
+  {
+    "name": "Kingston 16GB microSDHC Canvas Select 80R CL10 UHS-I Card + SD Adapter ",
+    "price": "250",
+    "description": " Kingston 16GB microSDHC Canvas Select 80R CL10 UHS-I Card + SD A",
+    "ratings": 4.5,
+    "images": [
+      {
+        "public_id": "products/sample",
+        "url": "https://res.cloudinary.com/sauromanih/image/upload/v1609602934/sample.jpg"
+      }
+    ],
+    "category": "Electronics",
+    "seller": "Ebay",
+    "stock": 50,
+    "numOfReviews": 32,
+    "reviews": []
+  }
+
+  {
+    "name": "Kaufman",
+    "price": "150",
+    "description": "kaufman",
+    "ratings": 5,
+    "images": [
+      {
+        "public_id": "products/sample",
+        "url": "https://res.cloudinary.com/sauromanih/image/upload/v1609602934/sample.jpg"
+      },
+      {
+        "public_id": "products/sample",
+        "url": "https://res.cloudinary.com/sauromanih/image/upload/v1609602934/sample.jpg"
+      }
+    ],
+    "category": "Electronics",
+    "seller": "Ebay",
+    "stock": 50,
+    "numOfReviews": 32,
+    "reviews": []
+  }
+]
