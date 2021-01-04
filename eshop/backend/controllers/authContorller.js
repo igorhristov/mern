@@ -20,10 +20,11 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     },
   });
 
-  // The HTTP 201 Created success status response code indicates that the request has succeeded and has led to the creation of a resource.
+  const token = user.getJwtToken()
 
+  // The HTTP 201 Created success status response code indicates that the request has succeeded and has led to the creation of a resource.
   res.status(201).json({
     success: true,
-    user,
+    token,
   });
 });
