@@ -2,6 +2,7 @@ const User = require("../models/user");
 
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
+const sendToken = require("../utils/jwtToken");
 
 // #опис        Register a user
 // #патека      POST /api/v1/register
@@ -20,13 +21,9 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     },
   });
 
-  const token = user.getJwtToken();
-
-  // The HTTP 201 Created success status response code indicates that the request has succeeded and has led to the creation of a resource.
-  res.status(201).json({
-    success: true,
-    token,
-  });
+  
+// send token to cookie
+  sendToken(user, 200, res);
 });
 
 // #опис        Login a user
@@ -54,9 +51,6 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Invalid Email or Password", 401));
   }
 
-  const token = user.getJwtToken();
-  res.status(200).json({
-    success: true,
-    token,
-  });
+// send token to cookie
+  sendToken(user, 200, res);
 });
