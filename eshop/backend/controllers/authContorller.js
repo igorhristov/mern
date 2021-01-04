@@ -21,8 +21,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     },
   });
 
-  
-// send token to cookie
+  // send token to cookie
   sendToken(user, 200, res);
 });
 
@@ -51,6 +50,21 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Invalid Email or Password", 401));
   }
 
-// send token to cookie
+  // send token to cookie
   sendToken(user, 200, res);
+});
+
+// #опис        Logout user
+// #патека      GET /api/v1/logout
+// #пристап     Privaten
+exports.logout = catchAsyncErrors(async (req, res, next) => {
+  res.cookie("token", null, {
+    expires: new Date(Date.now()),
+    httpOnly: true,
+  });
+
+  res.status(200).json({
+    success: true,
+    message: "Logged Out",
+  });
 });
