@@ -136,6 +136,37 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
   sendToken(user, 200, res);
 });
 
+// #опис        Get logged user details
+// #патека      GET /api/v1/me
+// #пристап     Privaten
+exports.getUserProfile = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
+
+// #опис        Update / Change password
+// #патека      PUT /api/v1/password/update
+// #пристап     Privaten
+exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.user.id).select("+password");
+
+  // Check previous user password
+  const isMatched = await user.comparePassword(req.body.oldPassword);
+  if (!isMatched) {
+    return next(new ErrorHandler("Old Password is incorect", 400));
+  }
+
+  user.password = req.body.password;
+  
+  await user.save();
+
+  sendToken(user, 200, res);
+});
+
 // #опис        Logout user
 // #патека      GET /api/v1/logout
 // #пристап     Privaten
