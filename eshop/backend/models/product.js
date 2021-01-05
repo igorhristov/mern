@@ -12,7 +12,7 @@ const productsSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Please enter product price"],
     maxlength: [6, "Product name cannot exceed 6 characters"],
-    default: 0
+    default: 0,
   },
 
   description: {
@@ -94,6 +94,12 @@ const productsSchema = new mongoose.Schema({
       },
     },
   ],
+
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
+    required: true,
+  },
 
   createdAt: {
     type: Date,
