@@ -161,10 +161,35 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
   }
 
   user.password = req.body.password;
-  
+
   await user.save();
 
   sendToken(user, 200, res);
+});
+
+// #опис        Update User Profile
+// #патека      GET /api/v1/me/update
+// #пристап     Privaten
+exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
+  
+  const newUserData = {
+    name: req.body.name,
+    email: req.body.email,
+  };
+
+  // Update avatar: TODO
+
+  // update user
+  const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  res.status(200).json({
+    success: true,
+  })
+
 });
 
 // #опис        Logout user
