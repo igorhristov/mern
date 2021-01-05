@@ -168,10 +168,9 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
 });
 
 // #опис        Update User Profile
-// #патека      GET /api/v1/me/update
+// #патека      PUT /api/v1/me/update
 // #пристап     Privaten
 exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
-  
   const newUserData = {
     name: req.body.name,
     email: req.body.email,
@@ -188,8 +187,7 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-  })
-
+  });
 });
 
 // #опис        Logout user
@@ -204,5 +202,80 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
   res.status(200).json({
     success: true,
     message: "Logged Out",
+  });
+});
+
+/// === ADMIN routes === ///
+
+// #опис        Get all users
+// #патека      GET /api/v1/admin/users
+// #пристап     ADMIN
+exports.allUsers = catchAsyncErrors(async (req, res, next) => {
+  const users = await User.find();
+
+  res.status(200).json({
+    success: true,
+    users,
+  });
+});
+
+// #опис        Get User details
+// #патека      GET /api/v1/admin/user/:id
+// #пристап     ADMIN
+exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(
+      new ErrorHandler(`User does not found with id ${req.params.id} `)
+    );
+  }
+
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
+
+// #опис        Get User details
+// #патека      PUT /api/v1/admin/user/:id
+// #пристап     ADMIN
+exports.updateUser = catchAsyncErrors(async (req, res, next) => {
+  const newUserData = {
+    name: req.body.name,
+    email: req.body.email,
+    role: req.body.role,
+  };
+
+  // update  user
+  const user = await User.findByIdAndUpdate(req.params.id, newUserData, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  res.status(200).json({
+    success: true,
+  });
+});
+
+// #опис        Delete User
+// #патека      DELETE /api/v1/admin/user/:id
+// #пристап     ADMIN
+exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(
+      new ErrorHandler(`User does not found with id ${req.params.id} `)
+    );
+  }
+
+  // Remove avatar from cloudinary - TODO
+
+  await user.remove();
+
+  res.status(200).json({
+    success: true,
   });
 });
