@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
-import HomePage from "./components/pages/HomePage";
+import HomePage from "./pages/HomePage";
 
 const App = () => {
   return (
@@ -11,7 +11,7 @@ const App = () => {
       <Header />
       <main>
         <Container>
-          <Route path="/" component={HomePage} />
+          <Route exact path="/" component={HomePage} />
         </Container>
       </main>
       <Footer />
