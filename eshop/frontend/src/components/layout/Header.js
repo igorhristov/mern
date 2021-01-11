@@ -1,4 +1,5 @@
 import React from "react";
+import { Route } from "react-router-dom";
 import {
   Navbar,
   Container,
@@ -8,6 +9,7 @@ import {
   Button,
 } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import Search from "./Search";
 
 const Header = () => {
   return (
@@ -26,14 +28,7 @@ const Header = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
-              <Form inline>
-                <FormControl
-                  type="text"
-                  placeholder="Search"
-                  className="mr-sm-2"
-                />
-                <Button variant="secondary">Search</Button>
-              </Form>
+              <Route render={({ history }) => <Search history={history} />} />
 
               <LinkContainer to="/login">
                 <Nav.Link>
