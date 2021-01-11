@@ -11,7 +11,7 @@ import { useAlert } from "react-alert";
 
 import "./homepage.css";
 
-const HomePage = () => {
+const HomePage = ({ match }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const alert = useAlert();
@@ -21,13 +21,15 @@ const HomePage = () => {
     (state) => state.products
   );
 
+  const keyword = match.params.keyword;
+
   useEffect(() => {
     if (error) {
       return alert.error(error);
     }
 
-    dispatch(getProducts(currentPage));
-  }, [dispatch, alert, error, currentPage]);
+    dispatch(getProducts(keyword, currentPage));
+  }, [dispatch, alert, error, keyword, currentPage]);
 
   function setCurrentPageNo(pageNumber) {
     setCurrentPage(pageNumber);
