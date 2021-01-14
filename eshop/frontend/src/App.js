@@ -6,6 +6,7 @@ import Footer from "./components/layout/Footer";
 import HomePage from "./pages/HomePage";
 import ProductDetails from "./components/product/ProductDetails";
 import Login from "./components/user/Login";
+import Register from "./components/user/Register";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route path="/search/:keyword" component={HomePage} />
           <Route path="/product/:id" component={ProductDetails} />
           <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
         </Container>
       </main>
       <Footer />
