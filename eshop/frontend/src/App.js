@@ -4,7 +4,8 @@ import { Container } from "react-bootstrap";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import HomePage from "./pages/HomePage";
-import ProductDetails from './components/product/ProductDetails'
+import ProductDetails from "./components/product/ProductDetails";
+import Login from "./components/user/Login";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <Route exact path="/" component={HomePage} />
           <Route path="/search/:keyword" component={HomePage} />
           <Route path="/product/:id" component={ProductDetails} />
+          <Route path="/login" component={Login} />
         </Container>
       </main>
       <Footer />

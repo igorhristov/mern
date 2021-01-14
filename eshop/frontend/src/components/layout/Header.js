@@ -1,13 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import {
-  Navbar,
-  Container,
-  Nav,
-  Form,
-  FormControl,
-  Button,
-} from "react-bootstrap";
+import { Navbar, Container, Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import Search from "./Search";
 
@@ -30,7 +23,7 @@ const Header = () => {
             <Nav className="ml-auto">
               <Route render={({ history }) => <Search history={history} />} />
 
-              <LinkContainer to="/login">
+              <LinkContainer to="/login" className="ml-4">
                 <Nav.Link>
                   <i className="fa fa-user"></i> Login
                 </Nav.Link>
