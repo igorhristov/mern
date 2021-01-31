@@ -3,13 +3,18 @@
 <textarea rows="6" [value]="newPost" #postInput></textarea>
 <hr />
 <button (click)="onAddPost(postInput)">Save Post</button>
-<p >{{newPost}}</p>
+<p>{{ newPost }}</p>
 <hr />
 <hr />
 <hr />
 
 <!-- twho way binding need forms module -->
-<textarea rows="6" [(ngModel)]="enteredValue"></textarea>
-<hr />
-<button (click)="onAddPost2()">Save Post</button>
-<p >{{newPost1}}</p>
+<mat-card>
+  <mat-form-field>
+    <textarea matInput rows="6" [(ngModel)]="enteredValue"></textarea>
+  </mat-form-field>
+  <button mat-raised-button color="accent" (click)="onAddPost2()">
+    Save Post
+  </button>
+</mat-card>
+<p>{{ newPost1 }}</p>
