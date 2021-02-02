@@ -1,45 +1,7 @@
 <h2>Post Create Component</h2>
-<!-- one way is with mark # to get inpty and past this to function and inside class -->
-<textarea rows="6" [value]="newPost1" #postInput></textarea>
-<hr />
-<button (click)="onAddPost1(postInput)">Save Post</button>
-<p>{{ newPost1 }}</p>
-<hr />
-<hr />
-<hr />
-
-<!-- twho way binding need forms module -->
-<mat-card>
-  <mat-form-field>
-    <textarea matInput rows="6" [(ngModel)]="enteredValue"></textarea>
-  </mat-form-field>
-  <button mat-raised-button color="accent" (click)="onAddPost2()">
-    Save Post
-  </button>
-</mat-card>
-<p>{{ newPost2 }}</p>
-
-<!-- create post -->
-<!-- <mat-card>
-  <mat-form-field>
-    <input matInput [(ngModel)]="enteredTitle"/>
-  </mat-form-field>
-  <mat-form-field>
-    <textarea matInput rows="6" [(ngModel)]="enteredContent"></textarea>
-  </mat-form-field>
-  <button mat-raised-button color="accent" (click)="onAddPost()">
-    Save Post
-  </button>
-</mat-card> -->
-
-<!-- form we dont need now two way binding -->
 <mat-card>
   <form (submit)="onAddPost(postForm)" #postForm="ngForm">
     <mat-form-field>
-      <!-- <input matInput name="title" ngModel required minlength="3" /> -->
-      <!-- <mat-error *ngIf="postForm.getControl('title').invalid">{{
-        "Form is invalid"
-      }}</mat-error> -->
       <input
         matInput
         name="title"

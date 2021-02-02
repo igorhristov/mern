@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs'
 
 import { Post } from '../post.model'
 import { PostService } from '../posts.service';
@@ -9,22 +10,25 @@ import { PostService } from '../posts.service';
   styleUrls: ['./post-list.component.css']
 })
 
-export class PostListComponent {
-  // posts = [
-  //   { title: "first post", content: 'this is the first post' },
-  //   { title: "second post", content: 'this is the second post' },
-  //   { title: "third post", content: 'this is the third post' },
-  // ]
+export class PostListComponent implements OnInit, OnDestroy {
 
-  @Input() posts: Post[] = []
+  posts: Post[] = [];
 
-  // postService: PostService;
-  //constructor is function that is called when angular is creating new istance of this component
-  // constructor(postsService: PostService) {
-  //   this.postService = postsService
-  // }
-
+  private postsSub: Subscription;
   // shortcut
   constructor(public postsService: PostService) {
+  }
+
+  // is recomended to use basic inicilization class in ngoinit
+  ngOnInit() {
+    this.posts = this.postsService.getPosts()
+    //subject has 3 arguments first is function that is cald whenever new value is recieved, second is error
+    this.postsSub = this.postsService.getPostUpdateListener().subscribe((posts: Post[]) => {
+      this.posts = posts
+    });
+  }
+
+  ngOnDestroy() {
+    this.postsSub.unsubscribe();
   }
 }
