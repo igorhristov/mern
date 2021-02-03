@@ -1,8 +1,23 @@
 const express = require("express");
-
+const mongoose = require("mongoose");
+const config = {
+  autoIndex: false,
+  useNewUrlParser: true,
+};
 const app = express();
 
 const Post = require("./models/post");
+mongoose
+  .connect(
+    "mongodb+srv://igormongo:<pass>@cluster0.zfxxz.mongodb.net/<dbname>?retryWrites=true&w=majority",
+    config
+  )
+  .then(() => {
+    console.log("Connected to database!");
+  })
+  .catch(() => {
+    console.log("Connection failed!");
+  });
 
 app.use(express.json());
 
