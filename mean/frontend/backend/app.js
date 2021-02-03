@@ -3,13 +3,14 @@ const mongoose = require("mongoose");
 const config = {
   autoIndex: false,
   useNewUrlParser: true,
+  useUnifiedTopology: true,
 };
 const app = express();
 
 const Post = require("./models/post");
 mongoose
   .connect(
-    "mongodb+srv://igormongo:<pass>@cluster0.zfxxz.mongodb.net/<dbname>?retryWrites=true&w=majority",
+    "mongodb+srv://igormongo:<pass>@cluster0.zfxxz.mongodb.net/<database>?retryWrites=true&w=majority",
     config
   )
   .then(() => {
@@ -41,8 +42,7 @@ app.post("/api/posts", (req, res, next) => {
     title: req.body.title,
     content: req.body.content,
   });
-  console.log(post);
-
+post.save()
   //201 is new resorce is created
   res.status(201).json({
     message: "Post added successufuly",
@@ -50,25 +50,12 @@ app.post("/api/posts", (req, res, next) => {
 });
 
 app.use("/api/posts", (req, res, next) => {
-  const posts = [
-    {
-      id: "adfadsfew",
-      title: "First Server Post",
-      content: "this is coming from server",
-    },
-    {
-      id: "sfae4asdf",
-      title: "Second Server Post",
-      content: "this is coming from server 2",
-    },
-    {
-      id: "kf6djhn,",
-      title: "Third Server Post",
-      content: "this is coming from server 3",
-    },
-  ];
-
-  res.status(200).json({ message: "Posts fetched succesfully!", posts: posts });
+  Post.find().then((documents) => {
+    console.log(documents);
+    res
+      .status(200)
+      .json({ message: "Posts fetched succesfully!", posts: documents });
+  });
 });
 
 module.exports = app;
