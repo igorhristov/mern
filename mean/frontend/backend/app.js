@@ -42,11 +42,12 @@ app.post("/api/posts", (req, res, next) => {
     title: req.body.title,
     content: req.body.content,
   });
-  post.save();
-
-  //201 is new resorce is created
-  res.status(201).json({
-    message: "Post added successufuly",
+  post.save().then((createdPost) => {
+    //201 is new resorce is created
+    res.status(201).json({
+      message: "Post added successufuly",
+      postId: createdPost._id,
+    });
   });
 });
 
@@ -59,9 +60,8 @@ app.get("/api/posts", (req, res, next) => {
 });
 
 app.delete("/api/posts/:id", (req, res, next) => {
-  console.log("server deleted end point works");
   Post.deleteOne({ _id: req.params.id }).then((result) => {
-    console.log(result);
+    console.log('post deleteed');
   });
   res.status(200).json({ message: "Post Deleted!" });
 });
