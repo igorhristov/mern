@@ -10,7 +10,7 @@ const app = express();
 const Post = require("./models/post");
 mongoose
   .connect(
-    "mongodb+srv://igormongo:<pass>@cluster0.zfxxz.mongodb.net/<database>?retryWrites=true&w=majority",
+    "mongodb+srv://igormongo:<pass>@cluster0.zfxxz.mongodb.net/node-angular?retryWrites=true&w=majority",
     config
   )
   .then(() => {
@@ -42,20 +42,28 @@ app.post("/api/posts", (req, res, next) => {
     title: req.body.title,
     content: req.body.content,
   });
-post.save()
+  post.save();
+
   //201 is new resorce is created
   res.status(201).json({
     message: "Post added successufuly",
   });
 });
 
-app.use("/api/posts", (req, res, next) => {
+app.get("/api/posts", (req, res, next) => {
   Post.find().then((documents) => {
-    console.log(documents);
     res
       .status(200)
       .json({ message: "Posts fetched succesfully!", posts: documents });
   });
+});
+
+app.delete("/api/posts/:id", (req, res, next) => {
+  console.log("server deleted end point works");
+  Post.deleteOne({ _id: req.params.id }).then((result) => {
+    console.log(result);
+  });
+  res.status(200).json({ message: "Post Deleted!" });
 });
 
 module.exports = app;
