@@ -1,6 +1,8 @@
-import React, { useRef } from "react";
+import React, { useState, useRef } from "react";
 
 const HomePage = () => {
+  const [apiDataItems, setApiDataItems] = useState([]);
+
   const nameInputRef = useRef();
   const emailInputRef = useRef();
   const messageInputRef = useRef();
@@ -28,6 +30,14 @@ const HomePage = () => {
       .then((data) => console.log(data));
   }
 
+  function getDataFromApiHandler() {
+    fetch("/api/feedback")
+      .then((response) => response.json())
+      .then((data) => {
+        setApiDataItems(data.message);
+      });
+  }
+
   return (
     <main>
       <h1>Home page</h1>
@@ -47,6 +57,20 @@ const HomePage = () => {
           <button type="submit">Send Message</button>
         </div>
       </form>
+      <hr />
+
+      <button onClick={getDataFromApiHandler}>Get Data</button>
+
+      <div>
+        {apiDataItems &&
+          apiDataItems.map((item) => (
+            <div key={item.id}>
+              <h2>{item.name}</h2>
+              <h2>{item.email}</h2>
+              <h2>{item.text}</h2>
+            </div>
+          ))}
+      </div>
     </main>
   );
 };
