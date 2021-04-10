@@ -1,6 +1,12 @@
-function handler(req, res) {
+import { MongoClient } from "mongodb";
+
+async function handler(req, res) {
   const eventId = req.query.eventId;
-  console.log(eventId);
+
+  const mongoUrl =
+    "mongodb+srv://igorTest:gasUlyAXpkgEBW8b@cluster0.zdkav.mongodb.net/events?retryWrites=true&w=majority";
+
+  const client = await MongoClient.connect(mongoUrl);
 
   if (req.method === "POST") {
     //add server-side validation
@@ -18,25 +24,34 @@ function handler(req, res) {
     }
 
     const newComment = {
-      id: new Date().toISOString(),
       email,
       name,
       text,
+      eventId,
     };
-    console.log(newComment);
+
+    const db = client.db();
+    const result = await db.collection("comments").insertOne(newComment);
+
+    //get right away id
+    newComment.id = result.insertedId;
 
     res.status(201).json({ message: "Added comment", comment: newComment });
   }
 
   if (req.method === "GET") {
-    const dummyList = [
-      { id: "c1", name: "igor", text: "first comment" },
-      { id: "c2", name: "Ale", text: "second comment" },
-      { id: "c3", name: "OL", text: "third comment" },
-    ];
+    const db = client.db();
 
-    res.status(200).json({ comments: dummyList });
+    const allComments = await db
+      .collection("comments")
+      .find()
+      .sort({ _id: -1 }) // sort in desending order so latest comment is first
+      .toArray();
+
+    res.status(200).json({ comments: allComments });
   }
+
+  client.close();
 }
 
 export default handler;
