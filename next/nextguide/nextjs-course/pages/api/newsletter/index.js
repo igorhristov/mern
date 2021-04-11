@@ -3,7 +3,11 @@ import { MongoClient } from "mongodb";
 async function connectDatabase() {
   const mongoUrl =
     "mongodb+srv://igorTest:gasUlyAXpkgEBW8b@cluster0.zdkav.mongodb.net/events?retryWrites=true&w=majority";
-  const client = await MongoClient.connect(mongoUrl);
+    //gasUlyAXpkgEBW8b
+  const client = await MongoClient.connect(mongoUrl, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
   return client;
 }
 
